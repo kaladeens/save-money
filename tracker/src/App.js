@@ -15,13 +15,14 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Sidebar />
+
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path = "/add" element = {<AddingPage />}/>
-          <Route path = "/view" element = {<ViewPage />}/> */}
+          <Route path = "/add" element = {<AddingPage />}/>
+          {/* <Route path = "/view" element = {<ViewPage />}/> */}
         </Routes>
       </Router>
-      <Sidebar />
     </div>
   );
 }
