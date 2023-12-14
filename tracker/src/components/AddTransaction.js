@@ -3,6 +3,13 @@ import '../styles/AddTransaction.css';
 function AddTransaction(){
     
     return(
+        useEffect(() => {
+            
+        })
+
+
+
+
         <div>
             <div className= 'Form'>
                 <form>
