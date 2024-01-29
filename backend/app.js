@@ -1,17 +1,20 @@
-// initialize express, mongoose, and path
+// initialise express and path
 const express = require('express');
-const mongoose = require('mongoose');
 const path = require('path');
 const morgan = require('morgan');
+const APIroutes = require('./API');
 
+// initialise express app
 const app = express();
 const PORT_NUMBER = 8080;
 
-let url = "mongodb://127.0.0.1:27017/expense_tracker";
+// getting the server right
+import {Client} from 'pg';
 
 async function connect(){
-    let response = await mongoose.connect(url);
-    console.log("Connected to MongoDB", response);
+    const Client = new Client({});
+    await client.connect();
+
 }
 connect();
 
@@ -20,3 +23,5 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(morgan('tiny'));
 
+//set API routes
+app.post('/addTransaction',APIroutes.addTransaction);

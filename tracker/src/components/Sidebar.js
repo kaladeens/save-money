@@ -3,9 +3,13 @@ import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
 
 function Sidebar(){
-    const linkStyle = {
+    const LinkStyle = {
         textDecoration: 'none',
-        color: 'inherit'
+        color: 'inherit',
+        fontSize: '18px',
+        position: 'fixed',
+        left: '20px',
+        marginTop: '25px',    
     }
     return (
         <div className='SidebarContainer'>
@@ -15,10 +19,9 @@ function Sidebar(){
                     <img src={logo} alt="Logo of broke human being" className='img'/>
                 </Link>
             </div>
-            <Link style = {linkStyle} to='/add'>
+            <Link style = {LinkStyle} to='/add'>
                 Add Transaction
             </Link>
-            
         </div>
     )
 }

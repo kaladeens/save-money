@@ -1,8 +1,8 @@
-
+import '../styles/Home.css';
 
 function HomePage(){
     return(
-        <div>
+        <div className="OuterBox">
             <h1>Home Page</h1>
         </div>
     )

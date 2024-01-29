@@ -7,3 +7,4 @@ Money tracker to help me spend less
 - top right pie chart of categories
 - bottom left list of transactions
 - comments on the transactions/ monthly spending
+- habit tracker too

@@ -4,7 +4,7 @@
     bottom: 0px;
     top:0px;
     display: block;
-    width:250px;
+    width: 250px;
     height: 100vh;
     left: 0px;
     overflow: auto;
@@ -16,6 +16,7 @@
     padding: 15px;
 }
 .img {
-    height: 65px;
+    height: 80px;
     
 }
+
