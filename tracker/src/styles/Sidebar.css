@@ -4,7 +4,7 @@
     bottom: 0px;
     top:0px;
     display: block;
-    width: 250px;
+    width: 225px;
     height: 100vh;
     left: 0px;
     overflow: auto;
@@ -15,8 +15,33 @@
     align-items: center;
     padding: 15px;
 }
+
+
 .img {
     height: 80px;
     
 }
 
+.link-wrapper{
+    color: aliceblue;
+    display: flexbox;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.link-wrapper a{
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    position: fixed;
+    left: 20px;
+    padding-bottom: 10px;
+}
+
+.link-wrapper a:hover{
+    color: #eb4343;
+}
+
+.link-wrapper div{
+    padding-bottom: 30px;
+}

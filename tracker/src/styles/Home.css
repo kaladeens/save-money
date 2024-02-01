@@ -1,7 +1,9 @@
 .OuterBox{
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-left: 250px;
+    flex-direction: column;
+    align-items: start;
+    margin-left: 225px;
+    padding-left: 25px;
+    background-color: grey; min-height: 100vh;
+    background-size: cover;
 }

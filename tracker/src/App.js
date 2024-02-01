@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
 import Home from './components/Home';
 import AddingPage from './components/AddTransaction';
+import Balance from './components/Balance';
 import ViewPage from './components/ViewPage';
 import Sidebar from './components/Sidebar';
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path = "/add" element = {<AddingPage />}/>
           {/* <Route path = "/view" element = {<ViewPage />}/> */}
+          <Route path = "/balance" element = {<Balance />}/>
         </Routes>
       </Router>
     </div>

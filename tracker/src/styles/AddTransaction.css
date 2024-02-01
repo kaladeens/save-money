@@ -1,13 +1,51 @@
 .Form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
+    margin-top: -5;
     width: 50%;
-    height: 100%;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    position: relative;
+    
+}
+.form-control{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    padding-bottom: 20px;
+    padding-right: 10px;
+}
+
+.form-control label {
+    margin-right: 10px;
+}
+
+.form-control input,
+.form-control textarea{
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.bg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    background-color: grey; min-height: 100vh;
+    background-size: cover;
+    margin-left: 225px;
+}
+.error{
+    color: red;
+    font-size: 12px;
+    margin: 0;
+    padding-left: 10px;
+}
+
+.button{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    margin-top: 10px;
 }
