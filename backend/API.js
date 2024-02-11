@@ -20,12 +20,12 @@ module.exports =   {
         }
     },
     getBalance: async (req, res) => {
-        const queryText = 'SELECT SUM(CASE WHEN amount < 0 THEN amount ELSE 0 END) AS negativeSum, SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END) AS positiveSum, SUM(amount) AS totalSum FROM transactions';
+        
+        const queryText = "SELECT SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END) AS total_positive, SUM(CASE WHEN amount < 0 THEN amount ELSE 0 END) AS total_negative, SUM(amount) AS total_all FROM transactions;";
         const response = await query(queryText, []);
-        const { negativeSum, positiveSum, totalSum } = response.rows[0];
-        const difference = positiveSum + negativeSum; // Calculate the total difference
-        console.log({ negativeSum, positiveSum, difference ,totalSum});
-        res.send({"expenses": negativeSum,"revenue": positiveSum,"balance": totalSum });
+        const { total_positive, total_negative, total_all } = response.rows[0];
+        console.log({ total_positive, total_negative, total_all });
+        res.send({"revenue": total_positive,"expenses": total_negative,"balance": total_all });
     }
     
 }

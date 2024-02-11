@@ -1,16 +1,16 @@
 import {useState, useEffect} from 'react';
-import '../styles/balance.css';
+import '../styles/Balance.css';
 import '../styles/Home.css';
 import { API_URL } from '../constants';
 
 
-function showBalance(){
-    [balance, setBalance] = useState(12);
-    [revenue, setRevenue] = useState(20);
-    [expenses, setExpenses] = useState(8);
+function ShowBalance(){
+    const [balance, setBalance] = useState(0);
+    const [revenue, setRevenue] = useState(0);
+    const [expenses, setExpenses] = useState(0);
 
-    useEffect(async () => {
-        await getBalance();
+    useEffect(() => {
+        getBalance();
         
     }, []);
 
@@ -22,11 +22,10 @@ function showBalance(){
             },
         });
         if (response.ok) {
-            console.log(response)
+            response = await response.json();
             setBalance(response.balance);
-            setRevenue(response.revenue);
             setExpenses(response.expenses);
-            console.log(response)
+            setRevenue(response.revenue);
             console.log('response worked!');
         } else {
             console.log('response did not work!');
@@ -37,13 +36,13 @@ function showBalance(){
     return (
         <div className="OuterBox">
             <h1>Balance </h1>
-            <div>
-                <h3>Income</h3>
-
-
+            <div className='balanceBox'>
+                <div className = 'valueBox'>
+                    Revenue {revenue} - Expenses {expenses} = Balance {balance}
+                </div>
             </div>
         </div>
     )
 }
 
-export default showBalance;
+export default ShowBalance;
