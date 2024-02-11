@@ -27,5 +27,6 @@ app.use(express.urlencoded({extended: false}));
 app.use(morgan('tiny'));
 
 //set API routes
-app.options('/api/addTransaction',cors(options));
+app.options('*',cors(options));
 app.post('/api/addTransaction',cors(options),APIroutes.addTransaction);
+app.get('/api/getBalance',cors(options),APIroutes.getBalance);
