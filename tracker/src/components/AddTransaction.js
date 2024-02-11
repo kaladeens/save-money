@@ -1,20 +1,22 @@
 import '../styles/AddTransaction.css';
 import React, { useEffect, useState } from 'react';
-
+import { API_URL } from '../constants';
 function AddTransaction() {
     const [amount, setAmount] = useState('');
     const [date, setDate] = useState('');
     const [description, setDescription] = useState('');
+    const [todayCheck, setChecked] = useState(false);
     const [errorStatus, setErrorStatus] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     useEffect(() => {
-        
+            
         }, []);
     async function handleSubmit(){
         console.log('amount: ', amount);
         console.log('date: ', date);
         console.log('description: ', description);
-        if (date === '' || amount === '' ) {
+        console.log('checked', todayCheck);
+        if ((date === '' && !todayCheck) || amount === '' ) {
             setErrorStatus(true);
             setErrorMessage('Please fill in mandatory  fields');
                 setTimeout(() => {
@@ -23,26 +25,49 @@ function AddTransaction() {
                 }, 3000)  
             return;
         }
-        
-        // let response = await fetch('/api/addTransaction', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         amount: amount,
-        //         date: date,
-        //         description: description
-        //     })
-        // });
+        let dateObj = new Date(date)
+        console.log('dateObj: ', dateObj);
 
-        // if (response.ok) {
-        //     console.log('response worked!');
-        // } else {
-        //     console.log('response did not work!');
-        // }
+        if (dateObj < new Date('2021-01-01') || dateObj > new Date()) {
+            setErrorStatus(true);
+            setErrorMessage('Please enter a date between 2021 and today');
+                setTimeout(() => {
+                    setErrorStatus(false);
+                    setErrorMessage('');
+                }, 3000)  
+            return;
+        }
+
+        
+        let response = await fetch(`${API_URL}/api/addTransaction`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                amount: amount,
+                date: date,
+                description: description
+            })
+        });
+
+        if (response.ok) {
+            console.log(response)
+            console.log('response worked!');
+        } else {
+            console.log('response did not work!');
+        }
     }
 
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+        if (event.target.checked) {
+            setDate(new Date().toISOString().split('T')[0]);
+        }
+        else {
+            setDate('');
+        }
+      };
     return (
         // for now keep but only have it be a component so no bg here in the main page then go hard
         <div className='bg'>
@@ -54,7 +79,7 @@ function AddTransaction() {
                         <label htmlFor='description'>Description</label>
                         <textarea type='text' 
                             
-                            placeholder='Enter description of Transaction'
+                            placeholder='Enter Description... (optional)'
                             id = 'description'
                             value = {description}
                             onChange={(e) => setDescription(e.target.value)}
@@ -64,7 +89,7 @@ function AddTransaction() {
                         <label htmlFor='amount'>
                             Amount 
                         </label>
-                        <div style = {{fontSize:'10px',padding: '0px'}}> (negative - expense, positive + income) </div>
+                        <div style = {{fontSize:'10px',padding: '0px', paddingRight: '5px'}}> (negative - expense, positive + income) </div>
                         
                         <input type='number'
                             step = '0.01' 
@@ -76,7 +101,7 @@ function AddTransaction() {
                             />
                         
                     </div>
-                    <div className='form-control' style = {{paddingBottom:'0'}}>
+                    <div className='form-control' style = {{paddingBottom:'0',alignItems:'center'}}>
                         <label htmlFor='date'>
                             Date</label>
                         <input type='date' 
@@ -84,11 +109,19 @@ function AddTransaction() {
                             
                             value = {date}
                             onChange={(e) => setDate(e.target.value)}
-                            required
                             />
-                        
+                        <label htmlFor='today' style = {{paddingLeft: '10px', fontSize: '12px'}}>
+                            Today: {new Date().toLocaleDateString()}
+                        </label>
+                        <input
+                            style={{width: '10px'}}
+                            type = 'checkbox'
+                            id = 'today'
+                            checked = {todayCheck}
+                            onChange = {handleChange}
+                            />
                     </div>
-                    <small>Enter Date (mandatory)</small>
+                    <small className='date-msg'>Enter Date (mandatory)</small>
 
                     <div className='button'>
                         <button  type='button' style = {{cursor: 'pointer'}}onClick={handleSubmit}>Add transaction</button>

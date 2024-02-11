@@ -14,14 +14,14 @@ function Sidebar(){
             </div>
             <div className='link-wrapper'>
                 <div>
-                <a href='/add'>
-                    Add Transaction
-                </a>
+                    <a href='/add'>
+                        Add Transaction
+                    </a>
                 </div>
                 <div>
-                <a href='/balance'>
-                    Balance
-                </a>
+                    <a href='/balance'>
+                        Balance
+                    </a>
                 </div>
             </div>
             

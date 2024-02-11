@@ -3,20 +3,23 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const APIroutes = require('./API');
+var cors = require('cors')
 
 // initialise express app
 const app = express();
-const PORT_NUMBER = 8080;
+const PORT_NUMBER = 8000;
+app.use(cors());
 
-// getting the server right
-import {Client} from 'pg';
+app.listen(PORT_NUMBER, () => {
+    console.log(`Server is running on port ${PORT_NUMBER}`);
+}   );
 
-async function connect(){
-    const Client = new Client({});
-    await client.connect();
-
-}
-connect();
+const options = {
+    origin: '*', //
+    methods : 'POST',
+    allowedHeaders: 'Content-Type',
+    optionsSuccessStatus: 200
+  };
 
 // initialize middleware
 app.use(express.json());
@@ -24,4 +27,5 @@ app.use(express.urlencoded({extended: false}));
 app.use(morgan('tiny'));
 
 //set API routes
-app.post('/addTransaction',APIroutes.addTransaction);
+app.options('/api/addTransaction',cors(options));
+app.post('/api/addTransaction',cors(options),APIroutes.addTransaction);

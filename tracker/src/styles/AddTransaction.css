@@ -46,6 +46,13 @@
 .button{
     display: flex;
     flex-direction: row;
-    align-items: start;
+    align-items: flex-start;
     margin-top: 10px;
+}
+
+.date-msg{
+    font-size: xx-small;
+    display: flex;
+    align-items: flex-start;
+    margin-left: 42px;
 }
