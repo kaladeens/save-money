@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import '../styles/Balance.css';
 import '../styles/Home.css';
 import { API_URL } from '../constants';
-
+import ListTransactions  from './ListTransactions';
 
 function ShowBalance(){
     const [balance, setBalance] = useState(0);
@@ -10,27 +10,18 @@ function ShowBalance(){
     const [expenses, setExpenses] = useState(0);
 
     useEffect(() => {
-        getBalance();
+        fetch(`${API_URL}/api/getBalance`)
+        .then(response => response.json())
+        .then(data => {
+            setBalance(data.balance);
+            setExpenses(data.expenses);
+            setRevenue(data.revenue);
+        })
+        .catch(err => console.log(err));
         
     }, []);
 
-    async function getBalance(){
-        let response = await fetch(`${API_URL}/api/getBalance`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        if (response.ok) {
-            response = await response.json();
-            setBalance(response.balance);
-            setExpenses(response.expenses);
-            setRevenue(response.revenue);
-            console.log('response worked!');
-        } else {
-            console.log('response did not work!');
-        }
-    }
+   
 
 
     return (
@@ -41,6 +32,7 @@ function ShowBalance(){
                     Revenue {revenue} - Expenses {expenses} = Balance {balance}
                 </div>
             </div>
+            <ListTransactions />
         </div>
     )
 }

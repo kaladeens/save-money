@@ -30,3 +30,4 @@ app.use(morgan('tiny'));
 app.options('*',cors(options));
 app.post('/api/addTransaction',cors(options),APIroutes.addTransaction);
 app.get('/api/getBalance',cors(options),APIroutes.getBalance);
+app.get('/api/getTransactions',cors(options),APIroutes.getTransactions);

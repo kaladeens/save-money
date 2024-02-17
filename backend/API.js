@@ -24,9 +24,16 @@ module.exports =   {
         const queryText = "SELECT SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END) AS total_positive, SUM(CASE WHEN amount < 0 THEN amount ELSE 0 END) AS total_negative, SUM(amount) AS total_all FROM transactions;";
         const response = await query(queryText, []);
         const { total_positive, total_negative, total_all } = response.rows[0];
-        console.log({ total_positive, total_negative, total_all });
         res.send({"revenue": total_positive,"expenses": total_negative,"balance": total_all });
+    },
+
+    getTransactions: async (req,res) => {
+        const queryText = 'SELECT * FROM transactions';
+        const response = await query(queryText, []);
+        res.send(response.rows);
     }
+
+
     
 }
 
