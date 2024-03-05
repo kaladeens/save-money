@@ -19,13 +19,13 @@ function ListTransactions(){
 
     return (
         <div className='box'>
-            <nav>
-                <ul>
+            <nav style = {{height: transactions.length*30}}>
+               
             {transactions && transactions.map(transaction => (
                
-                    <li>{transaction.description}</li>
+                    <div>{transaction.description}</div>
             ))}
-                </ul>
+               
             </nav>
         </div>
     )
